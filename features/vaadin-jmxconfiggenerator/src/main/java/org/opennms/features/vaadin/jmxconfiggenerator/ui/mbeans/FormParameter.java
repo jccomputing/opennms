@@ -1,8 +1,7 @@
-<%--
 /*******************************************************************************
  * This file is part of OpenNMS(R).
  *
- * Copyright (C) 2002-2014 The OpenNMS Group, Inc.
+ * Copyright (C) 2013-2014 The OpenNMS Group, Inc.
  * OpenNMS(R) is Copyright (C) 1999-2014 The OpenNMS Group, Inc.
  *
  * OpenNMS(R) is a registered trademark of The OpenNMS Group, Inc.
@@ -27,21 +26,37 @@
  *     http://www.opennms.com/
  *******************************************************************************/
 
---%>
+package org.opennms.features.vaadin.jmxconfiggenerator.ui.mbeans;
 
-<%@page language="java"
-	contentType="text/html"
-	session="true"
-%>
+/**
+ * Is used to configure the {@link NameEditForm}.
+ * 
+ * @author Markus von Rüden
+ * @see NameEditForm
+ */
+public interface FormParameter {
+	/**
+	 * Defines the caption for the {@link NameEditForm}.
+	 * 
+	 * @return the caption of the {@link NameEditForm}.
+	 */
+	String getCaption();
 
-<jsp:include page="/includes/bootstrap.jsp" flush="false" >
-  <jsp:param name="title" value="JMX Configuration Generator" />
-  <jsp:param name="headTitle" value="JMX Configuration Generator" />
-  <jsp:param name="location" value="admin" />
-  <jsp:param name="breadcrumb" value="<a href='admin/index.jsp'>Admin</a>" />
-  <jsp:param name="breadcrumb" value="JMX Configuration Generator" />
-  <jsp:param name="vaadinEmbeddedStyles" value="true" />
-</jsp:include>
+	/**
+	 * Returns the name of the property which is editable.
+	 * 
+	 * @return the property name which is editable.
+	 */
+	String getEditablePropertyName();
 
-<iframe src="osgi/jmx-config-tool" frameborder="0" style="height:100%; width:100%;"></iframe>
-<jsp:include page="/includes/bootstrap-footer.jsp" flush="true"/>
+	/**
+	 * Returns the property name which is not editable.
+	 * 
+	 * @return the property name which is not editable.
+	 */
+	String getNonEditablePropertyName();
+
+	String getEditablePropertyCaption();
+
+	String getNonEditablePropertyCaption();
+}

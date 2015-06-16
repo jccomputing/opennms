@@ -1,8 +1,7 @@
-<%--
 /*******************************************************************************
  * This file is part of OpenNMS(R).
  *
- * Copyright (C) 2002-2014 The OpenNMS Group, Inc.
+ * Copyright (C) 2013-2014 The OpenNMS Group, Inc.
  * OpenNMS(R) is Copyright (C) 1999-2014 The OpenNMS Group, Inc.
  *
  * OpenNMS(R) is a registered trademark of The OpenNMS Group, Inc.
@@ -27,21 +26,19 @@
  *     http://www.opennms.com/
  *******************************************************************************/
 
---%>
+package org.opennms.features.vaadin.jmxconfiggenerator;
 
-<%@page language="java"
-	contentType="text/html"
-	session="true"
-%>
+/**
+ * Config class.
+ *
+ * @author Markus von Rüden
+ */
+public interface Config {
 
-<jsp:include page="/includes/bootstrap.jsp" flush="false" >
-  <jsp:param name="title" value="JMX Configuration Generator" />
-  <jsp:param name="headTitle" value="JMX Configuration Generator" />
-  <jsp:param name="location" value="admin" />
-  <jsp:param name="breadcrumb" value="<a href='admin/index.jsp'>Admin</a>" />
-  <jsp:param name="breadcrumb" value="JMX Configuration Generator" />
-  <jsp:param name="vaadinEmbeddedStyles" value="true" />
-</jsp:include>
+    int ATTRIBUTES_ALIAS_MAX_LENGTH = 19;
+    int NAME_EDIT_FORM_HEIGHT = 150;
+    int NOTIFICATION_DELAY = 3000;
 
-<iframe src="osgi/jmx-config-tool" frameborder="0" style="height:100%; width:100%;"></iframe>
-<jsp:include page="/includes/bootstrap-footer.jsp" flush="true"/>
+    // Collectd Configuration
+    String DEFAULT_COLLECTD_PACAGE_NAME = "default";
+}

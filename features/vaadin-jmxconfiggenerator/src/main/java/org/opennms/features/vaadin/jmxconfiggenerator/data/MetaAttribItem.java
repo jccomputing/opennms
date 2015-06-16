@@ -1,8 +1,7 @@
-<%--
 /*******************************************************************************
  * This file is part of OpenNMS(R).
  *
- * Copyright (C) 2002-2014 The OpenNMS Group, Inc.
+ * Copyright (C) 2007-2014 The OpenNMS Group, Inc.
  * OpenNMS(R) is Copyright (C) 1999-2014 The OpenNMS Group, Inc.
  *
  * OpenNMS(R) is a registered trademark of The OpenNMS Group, Inc.
@@ -27,21 +26,38 @@
  *     http://www.opennms.com/
  *******************************************************************************/
 
---%>
+package org.opennms.features.vaadin.jmxconfiggenerator.data;
 
-<%@page language="java"
-	contentType="text/html"
-	session="true"
-%>
+import org.opennms.xmlns.xsd.config.jmx_datacollection.Attrib;
+import org.opennms.xmlns.xsd.config.jmx_datacollection.CompAttrib;
 
-<jsp:include page="/includes/bootstrap.jsp" flush="false" >
-  <jsp:param name="title" value="JMX Configuration Generator" />
-  <jsp:param name="headTitle" value="JMX Configuration Generator" />
-  <jsp:param name="location" value="admin" />
-  <jsp:param name="breadcrumb" value="<a href='admin/index.jsp'>Admin</a>" />
-  <jsp:param name="breadcrumb" value="JMX Configuration Generator" />
-  <jsp:param name="vaadinEmbeddedStyles" value="true" />
-</jsp:include>
+/**
+ * Meta interface to address all properties of an Attrib bean in vaadin
+ * framework. In this way we do not need use strings!
+ * 
+ * @author Markus von Rüden
+ * @see org.opennms.xmlns.xsd.config.jmx_datacollection.Attrib
+ */
+public interface MetaAttribItem {
 
-<iframe src="osgi/jmx-config-tool" frameborder="0" style="height:100%; width:100%;"></iframe>
-<jsp:include page="/includes/bootstrap-footer.jsp" flush="true"/>
+	enum AttribType {
+		counter, gauge;
+
+		public static AttribType valueOf(Object object) {
+			return gauge;
+		}
+
+		public static AttribType valueOf(Attrib attrib) {
+			return attrib == null ? gauge : valueOf(attrib.getType());
+		}
+
+		public static AttribType valueOf(CompAttrib attrib) {
+			return attrib == null ? gauge : valueOf(attrib.getType());
+		}
+	}
+
+	String NAME = "name";
+	String SELECTED = "selected";
+	String ALIAS = "alias";
+	String TYPE = "type";
+}

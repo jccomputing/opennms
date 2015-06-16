@@ -1,8 +1,7 @@
-<%--
 /*******************************************************************************
  * This file is part of OpenNMS(R).
  *
- * Copyright (C) 2002-2014 The OpenNMS Group, Inc.
+ * Copyright (C) 2012-2014 The OpenNMS Group, Inc.
  * OpenNMS(R) is Copyright (C) 1999-2014 The OpenNMS Group, Inc.
  *
  * OpenNMS(R) is a registered trademark of The OpenNMS Group, Inc.
@@ -27,21 +26,27 @@
  *     http://www.opennms.com/
  *******************************************************************************/
 
---%>
+package org.opennms.features.vaadin.jmxconfiggenerator;
 
-<%@page language="java"
-	contentType="text/html"
-	session="true"
-%>
+import org.opennms.vaadin.extender.AbstractApplicationFactory;
 
-<jsp:include page="/includes/bootstrap.jsp" flush="false" >
-  <jsp:param name="title" value="JMX Configuration Generator" />
-  <jsp:param name="headTitle" value="JMX Configuration Generator" />
-  <jsp:param name="location" value="admin" />
-  <jsp:param name="breadcrumb" value="<a href='admin/index.jsp'>Admin</a>" />
-  <jsp:param name="breadcrumb" value="JMX Configuration Generator" />
-  <jsp:param name="vaadinEmbeddedStyles" value="true" />
-</jsp:include>
+import com.vaadin.ui.UI;
 
-<iframe src="osgi/jmx-config-tool" frameborder="0" style="height:100%; width:100%;"></iframe>
-<jsp:include page="/includes/bootstrap-footer.jsp" flush="true"/>
+public class JmxConfigGeneratorUIFactory extends AbstractApplicationFactory {
+
+    /* (non-Javadoc)
+     * @see org.opennms.vaadin.extender.ApplicationFactory#createApplication(javax.servlet.http.HttpServletRequest)
+     */
+    @Override
+    public UI createUI() {
+        return new JmxConfigGeneratorUI();
+    }
+
+    /* (non-Javadoc)
+     * @see org.opennms.vaadin.extender.ApplicationFactory#getApplicationClass()
+     */
+    @Override
+    public Class<? extends UI> getUIClass() {
+        return JmxConfigGeneratorUI.class;
+    }
+}

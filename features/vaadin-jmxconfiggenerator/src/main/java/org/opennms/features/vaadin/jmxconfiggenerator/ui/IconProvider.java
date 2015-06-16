@@ -1,8 +1,7 @@
-<%--
 /*******************************************************************************
  * This file is part of OpenNMS(R).
  *
- * Copyright (C) 2002-2014 The OpenNMS Group, Inc.
+ * Copyright (C) 2013-2014 The OpenNMS Group, Inc.
  * OpenNMS(R) is Copyright (C) 1999-2014 The OpenNMS Group, Inc.
  *
  * OpenNMS(R) is a registered trademark of The OpenNMS Group, Inc.
@@ -27,21 +26,25 @@
  *     http://www.opennms.com/
  *******************************************************************************/
 
---%>
+package org.opennms.features.vaadin.jmxconfiggenerator.ui;
 
-<%@page language="java"
-	contentType="text/html"
-	session="true"
-%>
+import com.vaadin.server.FontAwesome;
+import com.vaadin.server.Resource;
 
-<jsp:include page="/includes/bootstrap.jsp" flush="false" >
-  <jsp:param name="title" value="JMX Configuration Generator" />
-  <jsp:param name="headTitle" value="JMX Configuration Generator" />
-  <jsp:param name="location" value="admin" />
-  <jsp:param name="breadcrumb" value="<a href='admin/index.jsp'>Admin</a>" />
-  <jsp:param name="breadcrumb" value="JMX Configuration Generator" />
-  <jsp:param name="vaadinEmbeddedStyles" value="true" />
-</jsp:include>
+/**
+ * This class provides the application with icons. If any icon changes or new
+ * icons are needed, please put them below.
+ * 
+ * @author Markus von Rüden
+ */
+public abstract class IconProvider {
 
-<iframe src="osgi/jmx-config-tool" frameborder="0" style="height:100%; width:100%;"></iframe>
-<jsp:include page="/includes/bootstrap-footer.jsp" flush="true"/>
+	public static final Resource DUMMY = FontAwesome.SQUARE;
+	public static final Resource BUTTON_SAVE = FontAwesome.FLOPPY_O;
+	public static final Resource BUTTON_NEXT = FontAwesome.CHEVRON_RIGHT;
+	public static final Resource BUTTON_PREVIOUS = FontAwesome.CHEVRON_LEFT;
+
+	public static Resource getIconForSelection(boolean selected) {
+		return selected ? FontAwesome.CHECK_SQUARE_O : FontAwesome.SQUARE_O;
+	}
+}

@@ -1,8 +1,7 @@
-<%--
 /*******************************************************************************
  * This file is part of OpenNMS(R).
  *
- * Copyright (C) 2002-2014 The OpenNMS Group, Inc.
+ * Copyright (C) 2012-2014 The OpenNMS Group, Inc.
  * OpenNMS(R) is Copyright (C) 1999-2014 The OpenNMS Group, Inc.
  *
  * OpenNMS(R) is a registered trademark of The OpenNMS Group, Inc.
@@ -27,21 +26,41 @@
  *     http://www.opennms.com/
  *******************************************************************************/
 
---%>
+package org.opennms.features.vaadin.jmxconfiggenerator.data;
 
-<%@page language="java"
-	contentType="text/html"
-	session="true"
-%>
+import com.vaadin.data.Item;
 
-<jsp:include page="/includes/bootstrap.jsp" flush="false" >
-  <jsp:param name="title" value="JMX Configuration Generator" />
-  <jsp:param name="headTitle" value="JMX Configuration Generator" />
-  <jsp:param name="location" value="admin" />
-  <jsp:param name="breadcrumb" value="<a href='admin/index.jsp'>Admin</a>" />
-  <jsp:param name="breadcrumb" value="JMX Configuration Generator" />
-  <jsp:param name="vaadinEmbeddedStyles" value="true" />
-</jsp:include>
+/**
+ * One part of the observer pattern. It indicates if the given model <code>T</code> has changed.
+ * In future releases a ModelChangeEvent may be introduced.
+ * 
+ * @author Markus von Rüden
+ */
+public interface SelectionChangedListener<T> {
 
-<iframe src="osgi/jmx-config-tool" frameborder="0" style="height:100%; width:100%;"></iframe>
-<jsp:include page="/includes/bootstrap-footer.jsp" flush="true"/>
+	class SelectionChangedEvent<T> {
+
+		private final Item selectedItem;
+		private T selectedBean;
+
+		public SelectionChangedEvent(Item selectedItem, T selectedBean) {
+			this.selectedItem = selectedItem;
+			this.selectedBean = selectedBean;
+		}
+
+		public Item getSelectedItem()  {
+			return selectedItem;
+		}
+
+		public T getSelectedBean() {
+			return selectedBean;
+		}
+	}
+
+
+	/**
+	 * Is invoked after a selection changes.
+	 * @param changeEvent the change Event
+	 */
+	void selectionChanged(SelectionChangedEvent<T> changeEvent);
+}

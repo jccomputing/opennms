@@ -1,8 +1,7 @@
-<%--
 /*******************************************************************************
  * This file is part of OpenNMS(R).
  *
- * Copyright (C) 2002-2014 The OpenNMS Group, Inc.
+ * Copyright (C) 2012-2014 The OpenNMS Group, Inc.
  * OpenNMS(R) is Copyright (C) 1999-2014 The OpenNMS Group, Inc.
  *
  * OpenNMS(R) is a registered trademark of The OpenNMS Group, Inc.
@@ -27,21 +26,40 @@
  *     http://www.opennms.com/
  *******************************************************************************/
 
---%>
+package org.opennms.features.vaadin.jmxconfiggenerator.ui;
 
-<%@page language="java"
-	contentType="text/html"
-	session="true"
-%>
+import com.vaadin.ui.HorizontalLayout;
+import com.vaadin.ui.Label;
+import com.vaadin.ui.ProgressIndicator;
+import com.vaadin.ui.Window;
 
-<jsp:include page="/includes/bootstrap.jsp" flush="false" >
-  <jsp:param name="title" value="JMX Configuration Generator" />
-  <jsp:param name="headTitle" value="JMX Configuration Generator" />
-  <jsp:param name="location" value="admin" />
-  <jsp:param name="breadcrumb" value="<a href='admin/index.jsp'>Admin</a>" />
-  <jsp:param name="breadcrumb" value="JMX Configuration Generator" />
-  <jsp:param name="vaadinEmbeddedStyles" value="true" />
-</jsp:include>
+/**
+ * A modal "PopUp" which shows some text to the user and a "sandglass" (ok it is
+ * a turning circle.. but you get my point ;)).
+ * 
+ * @author Markus von Rüden
+ */
+public class ProgressWindow extends Window {
 
-<iframe src="osgi/jmx-config-tool" frameborder="0" style="height:100%; width:100%;"></iframe>
-<jsp:include page="/includes/bootstrap-footer.jsp" flush="true"/>
+	private ProgressIndicator progress = new ProgressIndicator();
+	private HorizontalLayout layout = new HorizontalLayout();
+	private Label label = new Label("calculating some stuff");
+
+	public ProgressWindow() {
+		setCaption("processing...");
+		setModal(true);
+		setClosable(false);
+		setWidth(400, UNITS_PIXELS);
+		setHeight(200, UNITS_PIXELS);
+		progress.setIndeterminate(true);
+		layout.addComponent(progress);
+		layout.setSpacing(true);
+		layout.addComponent(label);
+		setContent(layout);
+		center();
+	}
+
+	public void setLabelText(String label) {
+		this.label.setValue(label);
+	}
+}

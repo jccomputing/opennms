@@ -1,8 +1,7 @@
-<%--
 /*******************************************************************************
  * This file is part of OpenNMS(R).
  *
- * Copyright (C) 2002-2014 The OpenNMS Group, Inc.
+ * Copyright (C) 2007-2014 The OpenNMS Group, Inc.
  * OpenNMS(R) is Copyright (C) 1999-2014 The OpenNMS Group, Inc.
  *
  * OpenNMS(R) is a registered trademark of The OpenNMS Group, Inc.
@@ -27,21 +26,31 @@
  *     http://www.opennms.com/
  *******************************************************************************/
 
---%>
+package org.opennms.features.vaadin.jmxconfiggenerator.ui.validators;
 
-<%@page language="java"
-	contentType="text/html"
-	session="true"
-%>
+import com.vaadin.data.Validator;
+import org.junit.Test;
 
-<jsp:include page="/includes/bootstrap.jsp" flush="false" >
-  <jsp:param name="title" value="JMX Configuration Generator" />
-  <jsp:param name="headTitle" value="JMX Configuration Generator" />
-  <jsp:param name="location" value="admin" />
-  <jsp:param name="breadcrumb" value="<a href='admin/index.jsp'>Admin</a>" />
-  <jsp:param name="breadcrumb" value="JMX Configuration Generator" />
-  <jsp:param name="vaadinEmbeddedStyles" value="true" />
-</jsp:include>
+/**
+ *
+ * @author Markus von Rüden
+ */
+public class AttributeNameValidatorTest {
 
-<iframe src="osgi/jmx-config-tool" frameborder="0" style="height:100%; width:100%;"></iframe>
-<jsp:include page="/includes/bootstrap-footer.jsp" flush="true"/>
+	@Test
+	public void testValidate() {
+		final String[] OK = new String[]{
+			"com", "comwebserver", "someEntry",
+			"HELLOWORLD", "HellowoRlD", "a", "ab"
+			};
+		final String[] FAIL = new String[]{
+			"", ".", ".org", "opennms.", ".serviceopennms.org", "servicename!",
+			"someadditional-entry", "some_Entry",
+			"com.java.op-erating-system","some.entry.separated.by_.dots.a__.lot.of_.dots",
+			"ab.cd", "a.bc", "ab.c",
+			"service name", "service,name", "service, name", "straße", "schädel", "hühner", "hölle"};
+		Validator validator = new AttributeNameValidator();
+		MBeansNameValidatorTest.validate(validator, OK, true);
+		MBeansNameValidatorTest.validate(validator, FAIL, false);
+	}
+}
