@@ -3,9 +3,16 @@
 :imagesdir: ../../../images
 
 ==== LLDP Discovery
+
 The _Link Layer Discovery Protocol (LLDP)_ is a vendor-neutral link layer protocol.
 It is used by network devices for advertising their identity, capabilities, and neighbors.
 _LLDP_ performs functions similar to several proprietary protocols, such as the _Cisco Discovery Protocol (CDP)_, _Extreme Discovery Protocol_, _Foundry Discovery Protocol (FDP)_, _Nortel Discovery Protocol (also known as SONMP)_, and _Microsoft's Link Layer Topology Discovery (LLTD)footnote:[Wikipedia LLDP: https://en.wikipedia.org/wiki/Link_Layer_Discovery_Protocol]_.
+
+NOTE: Only nodes with a running _LLDP_ process running can be part of the link discovery.
+      The data is similar as running a `show lldp neighbor` command on the device.
+      Linux or Windows servers don't have by default a _LLDP_ process running and will not be part of the link discovery.
+
+The following OIDs are supported to discover and build the _LLDP_ network topology.
 
 .Supported OIDs from LLDP-MIB
 [options="header, autowidth"]
@@ -64,4 +71,4 @@ _LLDP_ performs functions similar to several proprietary protocols, such as the 
 | _lldpRemSysName_          | `.1.0.8802.1.1.2.1.4.1.1.9` | The string value used to identify the system name of the remote system.
 |===
 
-Generic information if an _LLDP_ process is running can be found in the _LLDP Information_ box on the node page of the device.
+Generic information about the _LLDP_ process can be found in the _LLDP Information_ box on the _Node Detail Page_ of the device.

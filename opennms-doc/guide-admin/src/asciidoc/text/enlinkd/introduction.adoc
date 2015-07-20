@@ -5,17 +5,20 @@
 [[ga-enlinkd]]
 == Enhanced Linkd
 
-_Enhanced Linkd_ (Enlinkd) has been designed to get a snapshot of the neighbors from the device perspective.
-Every relationship discovered by _Enlinkd_ are called _Links_.
-The term _Link_ with _Enlinkd_ is not used in the same manner as in _Layer 2_ network speech for _Layer 2_, i.e. _Link Layer Discovery Protocol_.
-A _Link_ with _Enlinkd_ is a high level concept and describes a connection between two _OpenNMS Nodes_.
-These _Links_ can be discovered based on _Layer 2_ or _Layer 3_ protocols.
-The data to discover _Links_ is based on information provided from _SNMP agents_.
-For this reason, _SNMP_ must be configured properly and has to be enabled for the _OpenNMS_ server.
+_Enhanced Linkd (Enlinkd)_ has been designed to discover connections between nodes from several protocols provided through SNMP agents.
+_Enlinkd_ gathers this data in a regular interval and gets a snapshot of the neighbors from the device perspective.
+The connections discovered by _Enlinkd_ are called _Links_.
+The term _Link_ in context of _Enlinkd_ is not used in the same manner as in the network _Layer 2_ domain, where a link describes only a _Layer 2_ connection.
+A _Link_ in context of _Enlinkd_ is a high level concept and describes a relation between two _OpenNMS Nodes_.
+These _Links_ can be discovered based on information from _Layer 2_, _Layer 3_ or customized protocols.
+Most information are provided through _SNMP agents_ and must be configured properly to allow the _Link Discovery_.
+The different _Link Discovery_ methods require the support of special MIBS which has to be provided by the _SNMP agent_ and are key for representing the correct information.
 
-The coming section describe the _Enlinkd_ daemon and his configuration.
-Additionally the supported _Link discovery_ implementations will be described and which SNMP OIDs are supported to gather the _Links_ between _Nodes_.
+The coming sections describe the _Enlinkd_ daemon and his configuration.
+Additionally the supported _Link discovery_ implementations will be described and which SNMP OIDs which have to be supported to gather _Links_ between _Nodes_.
+Detailed information about discovered _Links_ and supported data can be seen on the _Node detail page_ in _OpenNMS_.
 
+[[ga-enlinkd-daemon]]
 === Enlinkd Daemon
 
 Essentially it asks each device the following question: "What is the network topology from your point of view".
@@ -25,12 +28,13 @@ It does not attempt to discover global topology or doing any correlation with th
 For large environments the behavior of _Enlinkd_ can be configured.
 During the _Link_ discovery process informational and error output is logged to a global log file.
 
-.Global configuration and log file for _Enlinkd_
+.Global log and configuration files for _Enlinkd_
 [options="header, autowidth"]
 |===
 | File                        | Location            | Description
 | `enlinkd-configuration.xml` | `$OPENNMS_HOME/etc` | Global configuration for the daemon process
 | `enlinkd.log`               | `$OPENNMS_HOME/log` | Global _Enlinkd_ log file
+| `log4j2.xml`                | `$OPENNMS_HOME/etc` | Configuration file to set the log level for _Enlinkd_
 |===
 
 .Configuration file for _Enlinkd_

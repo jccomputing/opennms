@@ -4,7 +4,15 @@
 
 ==== CDP Discovery
 
-The _CDP_ discovery is made walking the link:http://tools.cisco.com/Support/SNMP/do/BrowseMIB.do?local=en&step=2&mibName=CISCO-CDP-MIB[CISCO-CDP-MIB] and link:http://tools.cisco.com/Support/SNMP/do/BrowseMIB.do?local=en&step=2&mibName=CISCO-VTP-MIB[CISCO-VTP-MIB].
+The _Cisco Discovery Protocol (CDP)_ is a proprietary link layer protocol from _Cisco_.
+It is used by network devices to advertise identity, capabilities and neighbors.
+_CDP_ performs functions similar to several proprietary protocols, such as the _Link Layer Discovery Protocol (LLDP)_, _Extreme Discovery Protocol_, _Foundry Discovery Protocol (FDP)_, _Nortel Discovery Protocol (also known as SONMP)_, and _Microsoft's Link Layer Topology Discovery (LLTD)footnote:[Wikipedia LLDP: https://en.wikipedia.org/wiki/Link_Layer_Discovery_Protocol]_.
+The _CDP_ discovery uses information provided by the link:http://tools.cisco.com/Support/SNMP/do/BrowseMIB.do?local=en&step=2&mibName=CISCO-CDP-MIB[CISCO-CDP-MIB] and link:http://tools.cisco.com/Support/SNMP/do/BrowseMIB.do?local=en&step=2&mibName=CISCO-VTP-MIB[CISCO-VTP-MIB].
+
+NOTE: Only nodes with a running _CDP_ process running can be part of the link discovery.
+      The data is similar as running a `show cdp neighbor` command on the device.
+      Linux or Windows servers don't have by default a _CDP_ process running and will not be part of the link discovery.
+
 The following OIDs are supported to discover and build the _CDP_ network topology.
 
 .Supported OIDS from the CISCO-CDP-MIB to discover links
@@ -48,3 +56,5 @@ The following OIDs are supported to discover and build the _CDP_ network topolog
 | _ciscoVtpVlanType_        | `.1.3.6.1.4.1.9.9.46.1.3.1.1.3` |
 | _ciscoVtpVlanName_        | `.1.3.6.1.4.1.9.9.46.1.3.1.1.4` |
 |===
+
+Generic information about the _CDP_ process can be found in the _CDP Information_ box on the _Node Detail Page_ of the device.

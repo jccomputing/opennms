@@ -2,21 +2,17 @@
 // Allow GitHub image rendering
 :imagesdir: ../../../images
 
-==== Bridge Discovery
+==== Transparent Bridge Discovery
 
-First of all you should consider that the transparent bridge has only local map of the network:
-it acts in such a manner, if I got a frame whose source mac address is for example `0aabb11ccdd` on port 10 then I put an entry in my table for that mac address on that port so that when I got a frame with destination mac address 00aabb11ccd` I know that I have to forward it on port 10.
-Transparent bridging is not loop free so if you have loops you have to enable the spanning tree protocol that will detect loops and again will put some port in a state _blocking_ to avoid loops.
-To get links you need to perform some calculations that let you find the links.
-We can consider that mainly we have links between a workstation or server (identified by a mac address) and links between bridges.
-We call them _macLink_ and the others _bridgeLink_.
+Discovering _Layer 2_ network links using the _Bridge Forwarding_ table requires an special algorithm.
+To discover _Links_ an algorithm based on a scientific paper with the title link:http://cs-pub.bu.edu/groups/nrg/readinglist/lowekamp-sigcomm01.pdf[Topology Discovery for Large Ethernet Networks] is implemented.
+The gathered information is used to classify _Links_ in _macLink_ and _bridgeLink_.
+A _macLink_ represents a _Link_ between a workstation or server identified by a mac address.
 A _bridgeLink_ is a _connection_ between backbone ports.
-So we have written a code that is able to identify backbone ports and then able to associate mac address to the source port on source bridge where it was originally learned.
-So you have to consider the following, at the end the algorithm is able to make an association of bridge port with a set of _source mac addresses_ as it understand that they are all connected to that port.
-By the nature of the algorithm it is possible that we can have this set of mac addresses associated to more then one bridgeport: this is understable especially considering that we can "miss" a device in the middle.
-In this case we save set of mac addresses for all the bridge port addressing to them.
-So to get links you must first of all get the backbone links between bridges, these are saved into _bridgeBridgeLink_ table.
-The algorithm discovering the network topology using the bridge forwarding table is based on paper link:http://cs-pub.bu.edu/groups/nrg/readinglist/lowekamp-sigcomm01.pdf[Topology Discovery for Large Ethernet Networks].
+
+Transparent bridging is not loop free so if you have loops you have to enable the spanning tree protocol that will detect loops and again will put some port in a state _blocking_ to avoid loops.
+To get links it is necessary to perform some calculations that let define the _Links_.
+The following _MIBS_ must be supported by the _SNMP agent_ to allow _Transparent Bridge Discovery_.
 
 .Supported MIBS from the Cisco-VTP MIB
 [options="headers, autowidth"]
