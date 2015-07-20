@@ -1,0 +1,28 @@
+// Allow GitHub image rendering
+:imagesdir: ../../images
+
+==== OSPF Discovery
+
+The relevant MIB for OSPF topology are OSPF-MIB and OSPF-TRAP-MIB, supported by junos, and usually available with junos mib distribution under standardMib as mib-ospf2mib.txt and mib-ospf2trap.txt.
+In this mib are defined the relevant object to be used to find ospf links.
+In particular consider that
+
+* The Router ID, in OSPF, has the same format as an IP Address,
+* but identifies the router independent of its IP Address.
+
+Also all the interfaces are identified by the ip address.
+The Ospf links comes from the router ospfNbrTable defined in OSPF-MIB and this table is in practice persisted in ospflink table:
+
+[options="header, autowidth"]
+|===
+| Name                     | OID                     | Description
+| _ospfRouterId_           | `.1.3.6.1.2.1.14.1.1.0` | A 32-bit integer uniquely identifying the router in the Autonomous System.
+                                                       By convention, to ensure uniqueness, this should default to the value of one of the router's IP interface addresses.
+                                                       This object is persistent and when written the entity *should* save the change to non-volatile storage.
+| _ospfAdminStat_          | `.1.3.6.1.2.1.14.1.2.0` | The administrative status of OSPF in the router.  The value `enabled` denotes that the OSPF Process is active on at least one interface; `disabled` disables it on all interfaces.
+                                                       This object is persistent and when written the entity *should* save the change to non-volatile storage.
+| _ospfVersionNumber_      | `.1.3.6.1.2.1.14.1.3.0` | The current version number of the OSPF protocol is 2
+| _ospfAreaBdrRtrStatus_   | `.1.3.6.1.2.1.14.1.4.0` | A flag to note whether this router is an Area Border Router.
+| _ospfAreaASBdrRtrStatus_ | `.1.3.6.1.2.1.14.1.5.0` | A flag to note whether this router is configured as an Autonomous System Border Router.
+                                                       This object is persistent and when written the entity *should* save the change to non-volatile storage.
+|===

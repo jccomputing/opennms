@@ -1,0 +1,57 @@
+// Allow GitHub image rendering
+:imagesdir: ../../images
+
+[[ga-enlinkd]]
+== Enhanced Linkd
+
+_Enhanced Linkd_ (Enlinkd) has been designed to get a snapshot of the neighbors from the device point of view.
+Essentially it asks each device the following question: "What is the network topology from your point of view".
+From this point of view this will only provide local topology discovery features.
+It does not attempt to discover global topology or doing any correlation with the data coming from other nodes.
+
+_Enlinkd_ discovers network links from the following protocols:
+
+* Layer 2 protocols
+** link:https://en.wikipedia.org/wiki/Link_Layer_Discovery_Protocol[Link Layer Discovery Protocol] (LLDP)
+** link:https://en.wikipedia.org/wiki/Cisco_Discovery_Protocol[Cisco Discovery Protocol] (CDP)
+** transparent bridge discovery
+* Layer 3 protocols
+** link:https://en.wikipedia.org/wiki/Open_Shortest_Path_First[Open Shortest Path First] (OSPF)
+** link:https://en.wikipedia.org/wiki/IS-IS[Intermediate System to Intermediate System] (IS-IS)
+
+The link data discovered from _Enlinkd_ is provided in the _Topology User Interface_ and on the detail page of a node.
+
+[options="header, autowidth"]
+|===
+| File                        | Location            | Description
+| `enlinkd-configuration.xml` | `$OPENNMS_HOME/etc` | Global configuration for the daemon process
+| `enlinkd.log`               | `$OPENNMS_HOME/log` | Global _Enlinkd_ log file
+|===
+
+.Configuration for Enlinkd
+[source, xml]
+----
+<?xml version="1.0" encoding="ISO-8859-1"?>
+<enlinkd-configuration threads="5"
+                     initial_sleep_time="60000"
+                     rescan_interval="86400000"
+                     use-cdp-discovery="true"
+                     use-bridge-discovery="true"
+                     use-lldp-discovery="true"
+                     use-ospf-discovery="true"
+                     use-isis-discovery="true"
+                     />
+----
+
+[options="header, autowidth"]
+|===
+| Attribute              | Type      | Default    | Description
+| `threads`              | _Integer_ | `5`        | Number of parallel threads used to discover the topology.
+| `initial_sleep_time`   | _Integer_ | `60000`    | Time in milliseconds to wait for discovering the topology after OpenNMS is started.
+| `rescan_interval`      | _Integer_ | `86400000` | Interval to rediscover and update the topology in milliseconds.
+| `use-cdp-discovery`    | _Boolean_ | `true`     | Enable or disable topology discovery based on _CDP_ information.
+| `use-bridge-discovery` | _Boolean_ | `true`     | Enable or disable algorithm to discover the topology based on the _Bridge MIB_ information.
+| `use-lldp-discovery`   | _Boolean_ | `true`     | Enable or disable topology discovery based on _LLDP_ information.
+| `use-ospf-discovery`   | _Boolean_ | `true`     | Enable or disable topology discovery based on _OSPF_ information.
+| `use-isis-discovery`   | _Boolean_ | `true`     | Enable or disable topology discovery based on _IS-IS_ information.
+|===
