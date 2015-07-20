@@ -7,7 +7,7 @@ The _Link Layer Discovery Protocol (LLDP)_ is a vendor-neutral link layer protoc
 It is used by network devices for advertising their identity, capabilities, and neighbors.
 _LLDP_ performs functions similar to several proprietary protocols, such as the _Cisco Discovery Protocol (CDP)_, _Extreme Discovery Protocol_, _Foundry Discovery Protocol (FDP)_, _Nortel Discovery Protocol (also known as SONMP)_, and _Microsoft's Link Layer Topology Discovery (LLTD)footnote:[Wikipedia LLDP: https://en.wikipedia.org/wiki/Link_Layer_Discovery_Protocol]_.
 
-.Identifying the LLDP supported device
+.Supported OIDs from LLDP-MIB
 [options="header, autowidth"]
 |===
 | Name                      | OID                         | Description
@@ -22,6 +22,10 @@ _LLDP_ performs functions similar to several proprietary protocols, such as the 
 | _lldpLocChassisId_        | `.1.0.8802.1.1.2.1.3.2.0`   | The string value used to identify the chassis component associated with the local system.
 | _lldpLocSysName_          | `.1.0.8802.1.1.2.1.3.3.0`   | The string value used to identify the system name of the local system.
                                                             If the local agent supports link:http://tools.ietf.org/html/rfc3418[IETF RFC 3418], _lldpLocSysName_ object should have the same value of _sysName_ object.
+| _lldpLocPortIdSubtype_    | `.1.0.8802.1.1.2.1.3.7.1.2` | The type of port identifier encoding used in the associated _lldpLocPortId_ object.
+| _lldpLocPortId_           | `.1.0.8802.1.1.2.1.3.7.1.3` | The string value used to identify the port component associated with a given port in the local system.
+| _lldpLocPortDesc_         | `.1.0.8802.1.1.2.1.3.7.1.4` | The string value used to identify the _802 LAN station's_ port description associated with the local system.
+                                                            If the local agent supports _IETF RFC 2863_, _lldpLocPortDesc_ object should have the same value of _ifDescr_ object.
 | _lldpRemChassisIdSubtype_ | `.1.0.8802.1.1.2.1.4.1.1.4` | The type of encoding used to identify the chassis associated with the local system. Possible values can be: +
                                                             _chassisComponent(1)_ +
                                                             _interfaceAlias(2)_ +

@@ -1,6 +1,6 @@
 
 // Allow GitHub image rendering
-:imagesdir: ../../images
+:imagesdir: ../../../images
 
 ==== Bridge Discovery
 
@@ -27,7 +27,7 @@ The algorithm discovering the network topology using the bridge forwarding table
                                                                     If the device does not support _VTP_, the version is _none(3)_.
 |===
 
-.Supported MIBS from the MIB2-IP MIB
+.Supported MIBS from the IP-MIB
 [options="headers, autowidth"]
 |===
 | Name                            | OID                           | Description
@@ -42,7 +42,7 @@ The algorithm discovering the network topology using the bridge forwarding table
                                                                     Proper interpretation of such entries requires examination of the relevant _ipNetToMediaType_ object.
 |===
 
-.Supported MIBS from the Bridge MIB
+.Supported OIDS from the BRIDGE-MIB
 [options="headers, autowidth"]
 |===
 | Name                            | OID                           | Description
@@ -80,16 +80,35 @@ The algorithm discovering the network topology using the bridge forwarding table
                                                                     This value is compared to the _Root Path Cost_ field in received bridge _PDUs_.
 | _dot1dStpPortDesignatedBridge_  | `.1.3.6.1.2.1.17.2.15.1.8`    | The _Bridge Identifier_ of the bridge which this port considers to be the _Designated Bridge_ for this port's segment.
 | _dot1dStpPortDesignatedPort_    | `.1.3.6.1.2.1.17.2.15.1.9`    | The _Port Identifier_ of the port on the _Designated Bridge_ for this port's segment.
+| _dot1dTpFdbAddress_             | `.1.3.6.1.2.1.17.4.3.1.1`     | A unicast _MAC address_ for which the bridge has forwarding and/or filtering information.
+| _dot1dTpFdbPort_                | `.1.3.6.1.2.1.17.4.3.1.2`     | Either the value '0', or the port number of the port on which a frame having a source address equal to the value of the corresponding instance of _dot1dTpFdbAddress_ has been seen.
+                                                                    A value of '0' indicates that the port number has not been learned but that the bridge does have some forwarding/filtering information about this address (e.g. in the _dot1dStaticTable_).
+                                                                    Implementors are encouraged to assign the port value to this object whenever it is learned even for addresses for which the corresponding value of _dot1dTpFdbStatus_ is not _learned(3)_.
+| _dot1dTpFdbStatus_              | `.1.3.6.1.2.1.17.4.3.1.3`     | The status of this entry.
+                                                                    The meanings of the values are: +
+                                                                    *_other(1)_*: none of the following.
+                                                                    This would include the case where some other _MIB_ object (not the corresponding instance of _dot1dTpFdbPort_, nor an entry in the _dot1dStaticTable_) is being used to determine if and how frames addressed to the value of the corresponding instance of _dot1dTpFdbAddress_ are being forwarded. +
+                                                                    *_invalid(2)_*: this entry is not longer valid (e.g., it was learned but has since aged-out), but has not yet been flushed from the table. +
+                                                                    *_learned(3)_*: the value of the corresponding instance of _dot1dTpFdbPort_ was learned, and is being used. +
+                                                                    *_self(4)_*: the value of the corresponding instance of _dot1dTpFdbAddress_ represents one of the bridge's addresses.
+                                                                    The corresponding instance of _dot1dTpFdbPort_ indicates which of the bridge's ports has this address. +
+                                                                    *_mgmt(5)_*: the value of the corresponding instance of dot1dTpFdbAddress is also the value of an existing instance of dot1dStaticAddress.
+|===
+
+.Supported OIDS from the Q-BRIDGE-MIB
+[options="headers, autowidth"]
+|===
+| Name                            | OID                           | Description
 | _dot1qTpFdbPort_                | `.1.3.6.1.2.1.17.7.1.2.2.1.2` | Either the value _0_, or the port number of the port on which a frame having a source address equal to the value of the corresponding instance of _dot1qTpFdbAddress_ has been seen.
                                                                     A value of _0_ indicates that the port number has not been learned but that the device does have some forwarding/filtering information about this address (e.g., in the _dot1qStaticUnicastTable_).
                                                                     Implementors are encouraged to assign the port value to this object whenever it is learned, even for addresses for which the corresponding value of _dot1qTpFdbStatus_ is not _learned(3)_.
 | _dot1qTpFdbStatus_              | `.1.3.6.1.2.1.17.7.1.2.2.1.3` | The status of this entry.
                                                                     The meanings of the values are: +
-                                                                    *_other(1)_* - none of the following.
+                                                                    *_other(1)_*: none of the following.
                                                                     This may include the case where some other MIB object (not the corresponding instance of _dot1qTpFdbPort_, nor an entry in the _dot1qStaticUnicastTable_) is being used to determine if and how frames addressed to the value of the corresponding instance of _dot1qTpFdbAddress_ are being forwarded. +
-                                                                    *_invalid(2)_* - this entry is no longer valid (e.g., it was learned but has since aged out), but has not yet been flushed from the table. +
-                                                                    *_learned(3)_* - the value of the corresponding instance of _dot1qTpFdbPort_ was learned and is being used. +
-                                                                    *_self(4)_* - the value of the corresponding instance of _dot1qTpFdbAddress_ represents one of the device's addresses.
+                                                                    *_invalid(2)_*: this entry is no longer valid (e.g., it was learned but has since aged out), but has not yet been flushed from the table. +
+                                                                    *_learned(3)_*: the value of the corresponding instance of _dot1qTpFdbPort_ was learned and is being used. +
+                                                                    *_self(4)_*: the value of the corresponding instance of _dot1qTpFdbAddress_ represents one of the device's addresses.
                                                                     The corresponding instance of _dot1qTpFdbPort_ indicates which of the device's ports has this address. +
-                                                                    *_mgmt(5)_* - the value of the corresponding instance of _dot1qTpFdbAddress_ is also the value of an existing instance of _dot1qStaticAddress_.
+                                                                    *_mgmt(5)_*: the value of the corresponding instance of _dot1qTpFdbAddress_ is also the value of an existing instance of _dot1qStaticAddress_.
 |===
