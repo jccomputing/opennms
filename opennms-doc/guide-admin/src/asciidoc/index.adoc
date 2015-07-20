@@ -105,8 +105,12 @@ include::text/operation/newts.adoc[]
 
 // Enhanced Linkd
 include::text/enlinkd/introduction.adoc[]
-include::text/enlinkd/lldp-discovery.adoc[]
-include::text/enlinkd/cdp-discovery.adoc[]
+
+=== Layer 2 link discovery
 include::text/enlinkd/bridge-discovery.adoc[]
+include::text/enlinkd/cdp-discovery.adoc[]
+include::text/enlinkd/lldp-discovery.adoc[]
+
+=== Layer 3 link discovery
 include::text/enlinkd/is-is-discovery.adoc[]
 include::text/enlinkd/ospf-discovery.adoc[]

@@ -1,7 +1,8 @@
+
 // Allow GitHub image rendering
 :imagesdir: ../../images
 
-=== CDP Discovery
+==== CDP Discovery
 
 The _CDP_ discovery is made walking the link:http://tools.cisco.com/Support/SNMP/do/BrowseMIB.do?local=en&step=2&mibName=CISCO-CDP-MIB[CISCO-CDP-MIB] and link:http://tools.cisco.com/Support/SNMP/do/BrowseMIB.do?local=en&step=2&mibName=CISCO-VTP-MIB[CISCO-VTP-MIB].
 The following OIDs are supported to discover and build the _CDP_ network topology.

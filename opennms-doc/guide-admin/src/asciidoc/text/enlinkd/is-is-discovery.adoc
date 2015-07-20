@@ -1,7 +1,8 @@
+
 // Allow GitHub image rendering
 :imagesdir: ../../images
 
-=== IS-IS Discovery
+==== IS-IS Discovery
 
 IS-IS links are found walking the isisISAdjTable that is defined in ISIS-MIB, (mib-rfc4444.txt) in standard mibs under Juniper junos supported Mib tree.
 In this table you got the information you need to find the Adjency Intermediate System.
