@@ -11,7 +11,4 @@ _Enlinkd_ is able to discover a _Layer 2_ network links based on the following p
 * link:https://en.wikipedia.org/wiki/Cisco_Discovery_Protocol[Cisco Discovery Protocol] (CDP)
 * Transparent Bridge Discovery
 
-NOTE: If multiple protocols are enabled, the links will be discovered multiple times.
-      The topology WebUI will visualize for each technology a _Link_.
-
 The following section describes the required _SNMP MIB_ provided by the _SNMP agent_ to allow the _Link Discovery_.

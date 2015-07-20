@@ -65,3 +65,6 @@ During the _Link_ discovery process informational and error output is logged to 
 | `use-ospf-discovery`   | _Boolean_ | `true`     | Enable or disable topology discovery based on _OSPF_ information.
 | `use-isis-discovery`   | _Boolean_ | `true`     | Enable or disable topology discovery based on _IS-IS_ information.
 |===
+
+NOTE: If multiple protocols are enabled, the links will be discovered for each enabled discovery protocol.
+      The topology WebUI will visualize _Links_ for each discovery protocol.
