@@ -5,23 +5,27 @@
 [[ga-enlinkd]]
 == Enhanced Linkd
 
-_Enhanced Linkd_ (Enlinkd) has been designed to get a snapshot of the neighbors from the device point of view.
+_Enhanced Linkd_ (Enlinkd) has been designed to get a snapshot of the neighbors from the device perspective.
+Every relationship discovered by _Enlinkd_ are called _Links_.
+The term _Link_ with _Enlinkd_ is not used in the same manner as in _Layer 2_ network speech for _Layer 2_, i.e. _Link Layer Discovery Protocol_.
+A _Link_ with _Enlinkd_ is a high level concept and describes a connection between two _OpenNMS Nodes_.
+These _Links_ can be discovered based on _Layer 2_ or _Layer 3_ protocols.
+The data to discover _Links_ is based on information provided from _SNMP agents_.
+For this reason, _SNMP_ must be configured properly and has to be enabled for the _OpenNMS_ server.
+
+The coming section describe the _Enlinkd_ daemon and his configuration.
+Additionally the supported _Link discovery_ implementations will be described and which SNMP OIDs are supported to gather the _Links_ between _Nodes_.
+
+=== Enlinkd Daemon
+
 Essentially it asks each device the following question: "What is the network topology from your point of view".
 From this point of view this will only provide local topology discovery features.
 It does not attempt to discover global topology or doing any correlation with the data coming from other nodes.
 
-_Enlinkd_ discovers network links from the following protocols:
+For large environments the behavior of _Enlinkd_ can be configured.
+During the _Link_ discovery process informational and error output is logged to a global log file.
 
-* Layer 2 protocols
-** link:https://en.wikipedia.org/wiki/Link_Layer_Discovery_Protocol[Link Layer Discovery Protocol] (LLDP)
-** link:https://en.wikipedia.org/wiki/Cisco_Discovery_Protocol[Cisco Discovery Protocol] (CDP)
-** transparent bridge discovery
-* Layer 3 protocols
-** link:https://en.wikipedia.org/wiki/Open_Shortest_Path_First[Open Shortest Path First] (OSPF)
-** link:https://en.wikipedia.org/wiki/IS-IS[Intermediate System to Intermediate System] (IS-IS)
-
-The link data discovered from _Enlinkd_ is provided in the _Topology User Interface_ and on the detail page of a node.
-
+.Global configuration and log file for _Enlinkd_
 [options="header, autowidth"]
 |===
 | File                        | Location            | Description
@@ -29,7 +33,7 @@ The link data discovered from _Enlinkd_ is provided in the _Topology User Interf
 | `enlinkd.log`               | `$OPENNMS_HOME/log` | Global _Enlinkd_ log file
 |===
 
-.Configuration for Enlinkd
+.Configuration file for _Enlinkd_
 [source, xml]
 ----
 <?xml version="1.0" encoding="ISO-8859-1"?>
@@ -44,6 +48,7 @@ The link data discovered from _Enlinkd_ is provided in the _Topology User Interf
                      />
 ----
 
+.Descriptione for global configuration parameter
 [options="header, autowidth"]
 |===
 | Attribute              | Type      | Default    | Description

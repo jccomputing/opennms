@@ -1,0 +1,8 @@
+
+=== Layer 3 Link Discovery
+
+* Layer 3 protocols
+** link:https://en.wikipedia.org/wiki/Open_Shortest_Path_First[Open Shortest Path First] (OSPF)
+** link:https://en.wikipedia.org/wiki/IS-IS[Intermediate System to Intermediate System] (IS-IS)
+
+The link data discovered from _Enlinkd_ is provided in the _Topology User Interface_ and on the detail page of a node.

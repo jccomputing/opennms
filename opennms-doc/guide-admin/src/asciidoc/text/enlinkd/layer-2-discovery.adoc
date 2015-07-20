@@ -1,0 +1,8 @@
+
+=== Layer 2 Link Discovery
+_Enlinkd_ discovers network links from the following protocols:
+
+* Layer 2 protocols
+** link:https://en.wikipedia.org/wiki/Link_Layer_Discovery_Protocol[Link Layer Discovery Protocol] (LLDP)
+** link:https://en.wikipedia.org/wiki/Cisco_Discovery_Protocol[Cisco Discovery Protocol] (CDP)
+** transparent bridge discovery
