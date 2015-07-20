@@ -1,7 +1,7 @@
 // Allow GitHub image rendering
 :imagesdir: ../../images
 
-==== OSPF Discovery
+=== OSPF Discovery
 
 The relevant MIB for OSPF topology are OSPF-MIB and OSPF-TRAP-MIB, supported by junos, and usually available with junos mib distribution under standardMib as mib-ospf2mib.txt and mib-ospf2trap.txt.
 In this mib are defined the relevant object to be used to find ospf links.

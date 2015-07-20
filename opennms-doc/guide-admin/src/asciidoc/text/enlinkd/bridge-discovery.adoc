@@ -1,7 +1,7 @@
 // Allow GitHub image rendering
 :imagesdir: ../../images
 
-==== Bridge Discovery
+=== Bridge Discovery
 
 The links from the bridge forwarding table elaborations needs a deep explanation.
 First of all you should consider that the transparent bridge has only local map of the network:
