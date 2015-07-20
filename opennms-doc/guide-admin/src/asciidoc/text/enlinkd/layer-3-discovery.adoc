@@ -1,8 +1,14 @@
 
+// Allow GitHub image rendering
+:imagesdir: ../../images
+
+[[ga-enlinkd-layer-3-link-discovery]]
 === Layer 3 Link Discovery
 
-* Layer 3 protocols
-** link:https://en.wikipedia.org/wiki/Open_Shortest_Path_First[Open Shortest Path First] (OSPF)
-** link:https://en.wikipedia.org/wiki/IS-IS[Intermediate System to Intermediate System] (IS-IS)
+With _Enlinkd_ it is possible to get _Links_ based on network routing applications.
+The following routing daemons can be used to provide a discovery of links based _Layer 3_ information:
+
+* link:https://en.wikipedia.org/wiki/Open_Shortest_Path_First[Open Shortest Path First] (OSPF)
+* link:https://en.wikipedia.org/wiki/IS-IS[Intermediate System to Intermediate System] (IS-IS)
 
 The link data discovered from _Enlinkd_ is provided in the _Topology User Interface_ and on the detail page of a node.
