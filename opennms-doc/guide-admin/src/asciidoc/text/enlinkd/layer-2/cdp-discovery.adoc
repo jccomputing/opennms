@@ -6,7 +6,7 @@
 
 The _Cisco Discovery Protocol (CDP)_ is a proprietary link layer protocol from _Cisco_.
 It is used by network devices to advertise identity, capabilities and neighbors.
-_CDP_ performs functions similar to several proprietary protocols, such as the _Link Layer Discovery Protocol (LLDP)_, _Extreme Discovery Protocol_, _Foundry Discovery Protocol (FDP)_, _Nortel Discovery Protocol (also known as SONMP)_, and _Microsoft's Link Layer Topology Discovery (LLTD)footnote:[Wikipedia LLDP: https://en.wikipedia.org/wiki/Link_Layer_Discovery_Protocol]_.
+_CDP_ performs functions similar to several proprietary protocols, such as the _Link Layer Discovery Protocol (LLDP)_, _Extreme Discovery Protocol_, _Foundry Discovery Protocol (FDP)_, _Nortel Discovery Protocol (also known as SONMP)_, and _Microsoft's Link Layer Topology Discovery (LLTD)_.
 The _CDP_ discovery uses information provided by the link:http://tools.cisco.com/Support/SNMP/do/BrowseMIB.do?local=en&step=2&mibName=CISCO-CDP-MIB[CISCO-CDP-MIB] and link:http://tools.cisco.com/Support/SNMP/do/BrowseMIB.do?local=en&step=2&mibName=CISCO-VTP-MIB[CISCO-VTP-MIB].
 
 NOTE: Only nodes with a running _CDP_ process running can be part of the link discovery.
@@ -15,13 +15,24 @@ NOTE: Only nodes with a running _CDP_ process running can be part of the link di
 
 The following OIDs are supported to discover and build the _CDP_ network topology.
 
+ifDescr
+
+.Supported OIDS from the IF-MIB
+[options="header, autowidth"]
+|===
+| Name                      | OID                             | Description
+| _ifDescr_                 | `.1.3.6.1.2.1.2.2.1.2`          | A textual string containing information about the interface.
+                                                                This string should include the name of the manufacturer, the product name and the version of the interface hardware/software.
+|===
+
 .Supported OIDS from the CISCO-CDP-MIB to discover links
 [options="header, autowidth"]
 |===
 | Name                      | OID                             | Description
-|                           | `.1.3.6.1.2.1.2.2.1.2`          |
-|                           | `.1.3.6.1.4.1.9.9.23.1.1.1.1.6` |
-| _cdpCacheTableEntry_      | `.1.3.6.1.4.1.9.9.23.1.2.1.1`   |
+| _cdpInterfaceName_        | `.1.3.6.1.4.1.9.9.23.1.1.1.1.6` | The name of the local interface as advertised by _CDP_ in the _Port-ID TLV_.
+| _cdpCacheEntry_           | `.1.3.6.1.4.1.9.9.23.1.2.1.1`   | An entry (conceptual row) in the _cdpCacheTable_, containing the information received via _CDP_ on one interface from one device.
+                                                                Entries appear when a _CDP_ advertisement is received from a neighbor device.
+                                                                Entries disappear when _CDP_ is disabled on the interface, or globally.
 | _cdpCacheAddressType_     | `.1.3.6.1.4.1.9.9.23.1.2.1.1.3` | An indication of the type of address contained in the corresponding instance of _cdpCacheAddress_.
 | _cdpCacheAddress_         | `.1.3.6.1.4.1.9.9.23.1.2.1.1.4` | The (first) network-layer address of the device's SNMP-agent as reported in the Address _TLV_ of the most recently received _CDP_ message.
                                                                 For example, if the corresponding instance of _cacheAddressType_ had the value `ip(1)`, then this object would be an IP-address.
@@ -52,9 +63,14 @@ The following OIDs are supported to discover and build the _CDP_ network topolog
 | _vtpVersion_              | `.1.3.6.1.4.1.9.9.46.1.1.1.0`   | The version of VTP in use on the local system.
                                                                 A device will report its version capability and not any particular version in use on the device.
                                                                 If the device does not support _VTP_, the version is _none(3)_.
-| _ciscoVtpVlanState_       | `.1.3.6.1.4.1.9.9.46.1.3.1.1.2` |
-| _ciscoVtpVlanType_        | `.1.3.6.1.4.1.9.9.46.1.3.1.1.3` |
-| _ciscoVtpVlanName_        | `.1.3.6.1.4.1.9.9.46.1.3.1.1.4` |
+| _ciscoVtpVlanState_       | `.1.3.6.1.4.1.9.9.46.1.3.1.1.2` | The state of this _VLAN_.
+                                                                The state _mtuTooBigForDevice_ indicates that this device cannot participate in this _VLAN_ because the _VLAN's MTU_ is larger than the device can support. +
+                                                                The state _mtuTooBigForTrunk_ indicates that while this _VLAN's MTU_ is supported by this device, it is too large for one or more of the device's trunk ports. +
+                                                                _operational(1)_, _suspended(2)_, _mtuTooBigForDevice(3)_, _mtuTooBigForTrunk(4)_
+| _ciscoVtpVlanType_        | `.1.3.6.1.4.1.9.9.46.1.3.1.1.3` | The type of this _VLAN_. +
+                                                                _ethernet(1)_, _fddi(2)_, _tokenRing(3)_, _fddiNet(4)_, _trNet(5)_, _deprecated(6)_
+| _ciscoVtpVlanName_        | `.1.3.6.1.4.1.9.9.46.1.3.1.1.4` | The name of this _VLAN_.
+                                                                This name is used as the _ELAN-name_ for an _ATM LAN-Emulation_ segment of this _VLAN_.
 |===
 
 Generic information about the _CDP_ process can be found in the _CDP Information_ box on the _Node Detail Page_ of the device.
