@@ -1,6 +1,6 @@
 
 // Allow GitHub image rendering
-:imagesdir: ../../images
+:imagesdir: ../../../images
 
 ==== LLDP Discovery
 The _Link Layer Discovery Protocol (LLDP)_ is a vendor-neutral link layer protocol.
